@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, SafeAreaView } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import Router from './src/router';
 
 function App(): React.JSX.Element {
   return (
-    <SafeAreaView style={{ backgroundColor: '#fff' }}>
-      <Text>React Native</Text>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Router />
+    </NavigationContainer>
   );
 }
 
