@@ -8,20 +8,36 @@ import MyHeader from '../../components/MyHeader';
 const HomePage = () => {
   const [campingList, setCampingList] = useState([]);
   const [pageNo, setPageNo] = useState(1);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => setPageNo(1), []);
+  const fetchCampingList = async () => {
+    try {
+      const result = await getCampingList({ pageNo });
+      return result.response.body.items.item;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // reset
+  const initData = async () => {
+    setPageNo(1);
+    const result = await fetchCampingList();
+    setCampingList(result);
+  };
 
   useEffect(() => {
-    const fetchCampingList = async () => {
-      const result = await getCampingList({ pageNo });
-      setCampingList([...campingList, ...result.response.body.items.item]);
-    };
+    initData();
+  }, []);
 
-    fetchCampingList();
-  }, [pageNo]);
-
-  const onEndReached = () => {
+  const onEndReached = async () => {
     setPageNo(pageNo + 1);
+    setLoading(true);
+    if (loading) {
+      const result = await fetchCampingList();
+      setCampingList([...campingList, ...result]);
+      setLoading(false);
+    }
   };
 
   return (
@@ -37,13 +53,14 @@ const HomePage = () => {
       <View style={styles.mainContainer}>
         <FlatList
           data={campingList}
-          keyExtractor={({ item, index }) => index}
+          keyExtractor={item => item.contentId}
           renderItem={({ item }) => <CampingInfo {...item} />}
           removeClippedSubviews
           showsVerticalScrollIndicator={false}
           style={styles.campingListContainer}
           onEndReached={onEndReached}
-          onEndReachedThreshold={0.6}
+          onEndReachedThreshold={0.2}
+          ListFooterComponent={loading && <Text>Loading...</Text>}
         />
       </View>
     </SafeAreaView>

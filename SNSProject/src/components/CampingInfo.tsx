@@ -40,14 +40,19 @@ const CampingInfo = ({
     <TouchableOpacity
       onPress={() => navigation.navigate('campingInfoDetail')}
       style={styles.wrapper}>
-      <Image source={{ uri: firstImageUrl }} style={styles.campingImg} />
-      <View style={styles.indutyContainer}>
-        {induty.split(',').map(item => (
-          <View style={styles.indutyTextBox}>
-            <Text style={styles.indutyText}>{item}</Text>
+      {firstImageUrl && (
+        <>
+          <Image source={{ uri: firstImageUrl }} style={styles.campingImg} />
+          <View style={styles.indutyContainer}>
+            {induty.split(',').map(item => (
+              <View style={styles.indutyTextBox}>
+                <Text style={styles.indutyText}>{item}</Text>
+              </View>
+            ))}
           </View>
-        ))}
-      </View>
+        </>
+      )}
+
       <View style={styles.divNmContainer}>
         <Text style={styles.divNmText}>{facltDivNm}</Text>
         <Text style={styles.divNmText}>{mangeDivNm}</Text>

@@ -8,7 +8,7 @@ export const getCampingList = async ({ pageNo = 1 }: { pageNo: number }) => {
     MobileApp: 'SNSProject',
     serviceKey: SERVICE_KEY,
     _type: 'json',
-    pageNo: pageNo.toString(),
+    pageNo: `${pageNo}`,
   };
 
   const queryString = new URLSearchParams(params).toString();
