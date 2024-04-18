@@ -12,9 +12,9 @@ const { width } = Dimensions.get('window');
 const MyHeader = ({ title, leftIcon, rightIcon }: HeaderProps) => {
   return (
     <View style={styles.headerWrapper}>
-      <TouchableOpacity style={styles.iconButton}>{leftIcon}</TouchableOpacity>
+      {leftIcon}
       <Text style={styles.title}>{title}</Text>
-      <TouchableOpacity style={styles.iconButton}>{rightIcon}</TouchableOpacity>
+      {rightIcon}
     </View>
   );
 };
