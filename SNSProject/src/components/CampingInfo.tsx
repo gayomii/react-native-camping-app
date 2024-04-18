@@ -7,6 +7,7 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 type CampingInfoProps = {
   facltNm?: string;
@@ -33,8 +34,12 @@ const CampingInfo = ({
   induty,
   firstImageUrl,
 }: CampingInfoProps) => {
+  const navigation = useNavigation();
+
   return (
-    <TouchableOpacity style={styles.wrapper}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('campingInfoDetail')}
+      style={styles.wrapper}>
       <Image source={{ uri: firstImageUrl }} style={styles.campingImg} />
       <View style={styles.indutyContainer}>
         {induty.split(',').map(item => (

@@ -7,15 +7,22 @@ import MyHeader from '../../components/MyHeader';
 
 const HomePage = () => {
   const [campingList, setCampingList] = useState([]);
+  const [pageNo, setPageNo] = useState(1);
+
+  useEffect(() => setPageNo(1), []);
 
   useEffect(() => {
     const fetchCampingList = async () => {
-      const result = await getCampingList();
-      setCampingList(result.response.body.items.item);
+      const result = await getCampingList({ pageNo });
+      setCampingList([...campingList, ...result.response.body.items.item]);
     };
 
     fetchCampingList();
-  }, []);
+  }, [pageNo]);
+
+  const onEndReached = () => {
+    setPageNo(pageNo + 1);
+  };
 
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -30,11 +37,13 @@ const HomePage = () => {
       <View style={styles.mainContainer}>
         <FlatList
           data={campingList}
-          keyExtractor={item => item.contentId}
+          keyExtractor={({ item, index }) => index}
           renderItem={({ item }) => <CampingInfo {...item} />}
           removeClippedSubviews
           showsVerticalScrollIndicator={false}
           style={styles.campingListContainer}
+          onEndReached={onEndReached}
+          onEndReachedThreshold={0.6}
         />
       </View>
     </SafeAreaView>
@@ -50,8 +59,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   mainContainer: {
-    paddingBottom: 60,
-    backgroundColor: '#fff',
+    paddingBottom: 64,
     flex: 1,
   },
 });
