@@ -16,20 +16,16 @@ const iconNames: { [key: string]: string } = {
 };
 
 const BottomIcon = ({ name, type = 'inactive' }: ButtonIconProps) => {
+  const imgName = type === 'inactive' ? `${name}_off` : name;
   return (
     <View>
-      <Image
-        source={bottomImages[name]}
-        style={[styles.bottomIconImage, type === 'inactive' && { opacity: 0.3 }]}
-      />
+      <Image source={bottomImages[imgName]} style={styles.bottomIconImage} />
     </View>
   );
 };
 
 const CustomBottomTab = ({ state, navigation, insets }: BottomTabBarProps) => {
   const { routes, index: focusedIndex } = state;
-  const leftRoutes = routes.slice(0, 2);
-  const rightRoutes = routes.slice(2);
 
   const onPress = (route: any, index: any) => {
     const event = navigation.emit({
@@ -45,45 +41,24 @@ const CustomBottomTab = ({ state, navigation, insets }: BottomTabBarProps) => {
   };
 
   return (
-    <View style={[styles.bottomTabBarWrapper]}>
-      <View style={[styles.leftBottomChild, { paddingBottom: insets.bottom }]}>
-        {leftRoutes.map((route, index) => {
-          const isFocused = routes[focusedIndex].name === route.name;
-          return (
-            <TouchableOpacity
-              style={styles.bottomTabBar}
-              onPress={() => onPress(route, index)}
-              key={route.key}
-              activeOpacity={0.7}>
-              <Animated.View style={styles.bottomTabBarItem}>
-                {BottomIcon({
-                  name: iconNames[route.name],
-                  type: isFocused ? 'active' : 'inactive',
-                })}
-              </Animated.View>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
-      <View style={[styles.rightBottomChild, { paddingBottom: insets.bottom }]}>
-        {rightRoutes.map((route, index) => {
-          const isFocused = routes[focusedIndex].name === route.name;
-          return (
-            <TouchableOpacity
-              style={styles.bottomTabBar}
-              onPress={() => onPress(route, index)}
-              key={route.key}
-              activeOpacity={0.7}>
-              <Animated.View style={styles.bottomTabBarItem}>
-                {BottomIcon({
-                  name: iconNames[route.name],
-                  type: isFocused ? 'active' : 'inactive',
-                })}
-              </Animated.View>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
+    <View style={[styles.bottomTabBarWrapper, { paddingBottom: insets.bottom }]}>
+      {routes.map((route, index) => {
+        const isFocused = routes[focusedIndex].name === route.name;
+        return (
+          <TouchableOpacity
+            style={styles.bottomTabBar}
+            onPress={() => onPress(route, index)}
+            key={route.key}
+            activeOpacity={0.7}>
+            <Animated.View style={styles.bottomTabBarItem}>
+              {BottomIcon({
+                name: iconNames[route.name],
+                type: isFocused ? 'active' : 'inactive',
+              })}
+            </Animated.View>
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
 };
@@ -95,6 +70,9 @@ const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: 'space-between',
     zIndex: 10,
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingTop: 24,
   },
   bottomTabBar: {
     flex: 1,
@@ -111,24 +89,6 @@ const styles = StyleSheet.create({
   bottomIconImage: {
     width: 40,
     height: 40,
-  },
-  leftBottomChild: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderTopRightRadius: 50,
-    paddingTop: 24,
-    backgroundColor: '#fff',
-  },
-  rightBottomChild: {
-    flex: 1,
-    flexDirection: 'row',
-    borderTopLeftRadius: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 24,
-    backgroundColor: '#fff',
   },
 });
 
