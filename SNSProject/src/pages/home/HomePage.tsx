@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Image, FlatList } from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+
 import { getCampingList } from '../../apis/campingApi';
 import CampingInfo from '../../components/CampingInfo';
 import MyHeader from '../../components/MyHeader';
@@ -45,9 +53,16 @@ const HomePage = () => {
       <View>
         <MyHeader
           title="캠핑투게더"
-          leftIcon={<Icon name="grip-lines" size={18} />}
-          // TODO: Image일때, style
-          rightIcon={<Icon name="search" size={18} />}
+          leftIcon={
+            <TouchableOpacity style={styles.iconButton}>
+              <Icon name="grip-lines" size={18} />
+            </TouchableOpacity>
+          }
+          rightIcon={
+            <TouchableOpacity style={styles.iconButton}>
+              <Icon name="search" size={18} />
+            </TouchableOpacity>
+          }
         />
       </View>
       <View style={styles.mainContainer}>
@@ -78,6 +93,11 @@ const styles = StyleSheet.create({
   mainContainer: {
     paddingBottom: 64,
     flex: 1,
+  },
+  iconButton: {
+    backgroundColor: '#eee0da',
+    borderRadius: 50,
+    padding: 12,
   },
 });
 
