@@ -8,18 +8,8 @@ import {
   Dimensions,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
-type CampingInfoProps = {
-  facltNm?: string;
-  addr1?: string;
-  facltDivNm?: string;
-  mangeDivNm?: string;
-  resveCl?: string;
-  caravInnerFclty?: string;
-  intro?: string;
-  induty?: string;
-  firstImageUrl?: string;
-};
+import { StackNavigationProp } from '@react-navigation/stack';
+import { HomeTabParamList, CampingInfoProps } from '../types/types';
 
 const { width, height } = Dimensions.get('window');
 
@@ -34,11 +24,23 @@ const CampingInfo = ({
   induty,
   firstImageUrl,
 }: CampingInfoProps) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<HomeTabParamList>>();
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('campingInfoDetail')}
+      onPress={() => {
+        navigation.navigate('campingInfoDetail', {
+          facltNm,
+          addr1,
+          facltDivNm,
+          mangeDivNm,
+          resveCl,
+          caravInnerFclty,
+          intro,
+          induty,
+          firstImageUrl,
+        });
+      }}
       style={styles.wrapper}>
       {firstImageUrl && (
         <>
