@@ -75,7 +75,13 @@ const HomePage = () => {
           style={styles.campingListContainer}
           onEndReached={onEndReached}
           onEndReachedThreshold={0.2}
-          ListFooterComponent={loading && <Text>Loading...</Text>}
+          ListFooterComponent={
+            loading && (
+              <View style={styles.loadingIcon}>
+                <Icon name="ellipsis-h" size={30} />
+              </View>
+            )
+          }
         />
       </View>
     </SafeAreaView>
@@ -98,6 +104,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#eee0da',
     borderRadius: 50,
     padding: 12,
+  },
+  loadingIcon: {
+    alignItems: 'center',
+    paddingVertical: 12,
+    opacity: 0.2,
   },
 });
 
