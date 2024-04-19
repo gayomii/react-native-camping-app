@@ -42,18 +42,21 @@ const CampingInfo = ({
         });
       }}
       style={styles.wrapper}>
-      {firstImageUrl && (
-        <>
-          <Image source={{ uri: firstImageUrl }} style={styles.campingImg} />
-          <View style={styles.indutyContainer}>
-            {induty.split(',').map(item => (
-              <View style={styles.indutyTextBox}>
-                <Text style={styles.indutyText}>{item}</Text>
-              </View>
-            ))}
-          </View>
-        </>
+      {firstImageUrl ? (
+        <Image source={{ uri: firstImageUrl }} style={styles.campingImg} />
+      ) : (
+        <View style={[styles.campingImg, styles.noImageBox]}>
+          <Text>no image</Text>
+        </View>
       )}
+
+      <View style={styles.indutyContainer}>
+        {induty.split(',').map(item => (
+          <View style={styles.indutyTextBox}>
+            <Text style={styles.indutyText}>{item}</Text>
+          </View>
+        ))}
+      </View>
 
       <View style={styles.divNmContainer}>
         <Text style={styles.divNmText}>{facltDivNm}</Text>
@@ -82,6 +85,11 @@ const styles = StyleSheet.create({
     height: width / 2,
     borderRadius: 4,
     marginBottom: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  noImageBox: {
+    backgroundColor: '#eee',
   },
   indutyContainer: {
     position: 'absolute',
