@@ -7,8 +7,8 @@ import {
 
 import CustomBottomTab from './components/CustomBottomTab';
 import HomePage from './pages/home/HomePage';
-import CommunityPage from './pages/articleAndCommunity/CommunityPage';
-import ArticlePage from './pages/articleAndCommunity/ArticlePage';
+import CommunityPage from './pages/community/CommunityPage';
+import ArticlePage from './pages/article/ArticlePage';
 import SettingsPage from './pages/setting/SettingsPage';
 import CampingInfoDetailPage from './pages/home/CampingInfoDetailPage';
 
@@ -34,8 +34,8 @@ const MainTab = () => {
         headerShown: false,
       }}>
       <Tab.Screen name="camping" component={HomeTab} />
-      <Tab.Screen name="community" component={CommunityPage} />
       <Tab.Screen name="article" component={ArticlePage} />
+      <Tab.Screen name="community" component={CommunityPage} />
       <Tab.Screen name="settings" component={SettingsPage} />
     </Tab.Navigator>
   );

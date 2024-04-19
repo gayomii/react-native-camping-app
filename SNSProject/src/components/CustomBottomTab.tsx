@@ -10,8 +10,8 @@ type ButtonIconProps = {
 
 const iconNames: { [key: string]: string } = {
   camping: 'camping',
-  community: 'community',
   article: 'article',
+  community: 'community',
   settings: 'settings',
 };
 
