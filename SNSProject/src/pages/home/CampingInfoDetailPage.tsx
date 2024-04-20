@@ -45,11 +45,7 @@ const CampingInfoDetailPage = () => {
             </TouchableOpacity>
           }
           // TODO: Image일때, style
-          rightIcon={
-            <TouchableOpacity style={styles.iconButton}>
-              <Icon name="search" size={18} />
-            </TouchableOpacity>
-          }
+          rightIcon={<View style={{ width: 20, height: 20 }}></View>}
         />
       </View>
       <ScrollView style={styles.infoContainer}>

@@ -137,6 +137,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '600',
     color: '#707070',
+    flexWrap: 'wrap',
+    width: '60%',
   },
   resveText: {
     fontSize: 18,
