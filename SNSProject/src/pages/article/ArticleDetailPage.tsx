@@ -6,9 +6,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Image,
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import MyHeader from '../../components/MyHeader';
 import { formatDate } from '../../utils/getDate';
 
@@ -21,7 +23,7 @@ const ArticleDetailPage = () => {
     <SafeAreaView style={styles.wrapper}>
       <View>
         <MyHeader
-          title="캠핑장 상세 정보"
+          title="아티클 상세 정보"
           leftIcon={
             <TouchableOpacity
               style={styles.iconButton}
@@ -29,12 +31,15 @@ const ArticleDetailPage = () => {
               <Icon name="long-arrow-alt-left" size={18} />
             </TouchableOpacity>
           }
-          // TODO: Image일때, style
-          rightIcon={<View style={{ width: 20, height: 20 }}></View>}
+          rightIcon={
+            <TouchableOpacity style={styles.iconButton}>
+              <Ionicons name="bookmark-outline" size={18} />
+            </TouchableOpacity>
+          }
         />
       </View>
       <ScrollView style={styles.articleWrapper}>
-        {/* <Image source={articleImg} /> */}
+        <Image source={articleImg} style={styles.articleImage} />
         <View style={styles.articleDetail}>
           <Text style={styles.articleTitle}>{title}</Text>
           <Text style={styles.articleTime}>{formatDate(new Date(createdAt))}</Text>
@@ -63,6 +68,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 14,
     gap: 14,
+    borderRadius: 10,
+    height: '100%',
+  },
+  articleImage: {
+    width: '100%',
+    borderRadius: 10,
+    marginBottom: 14,
   },
   articleTitle: {
     fontSize: 18,
