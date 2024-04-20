@@ -11,6 +11,7 @@ import CommunityPage from './pages/community/CommunityPage';
 import ArticlePage from './pages/article/ArticlePage';
 import SettingsPage from './pages/setting/SettingsPage';
 import CampingInfoDetailPage from './pages/home/CampingInfoDetailPage';
+import ArticleDetailPage from './pages/article/ArticleDetailPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,6 +27,15 @@ const HomeTab = () => {
   );
 };
 
+const ArticleTab = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="articleList" component={ArticlePage} />
+      <Stack.Screen name="articleDetail" component={ArticleDetailPage} />
+    </Stack.Navigator>
+  );
+};
+
 const MainTab = () => {
   return (
     <Tab.Navigator
@@ -34,7 +44,7 @@ const MainTab = () => {
         headerShown: false,
       }}>
       <Tab.Screen name="camping" component={HomeTab} />
-      <Tab.Screen name="article" component={ArticlePage} />
+      <Tab.Screen name="article" component={ArticleTab} />
       <Tab.Screen name="community" component={CommunityPage} />
       <Tab.Screen name="settings" component={SettingsPage} />
     </Tab.Navigator>
