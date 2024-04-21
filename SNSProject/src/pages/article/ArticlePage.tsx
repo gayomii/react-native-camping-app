@@ -63,23 +63,23 @@ const dummyArticle = [
   },
 ];
 
-type SORT_TYPE = {
+type SortType = {
   display: string;
   value: string;
 };
 
-type SORT_TYPES = {
-  [key: string]: SORT_TYPE;
+type SortTypes = {
+  [key: string]: SortType;
 };
 
-const SortType: SORT_TYPES = {
+const SortType: SortTypes = {
   FAVORITE: { display: '즐겨찾기순', value: 'FAVORITE' },
   LATEST: { display: '최신순', value: 'LATEST' },
 };
 
 const ArticlePage = () => {
-  const [sortedType, setSortedType] = useState<SORT_TYPE>(SortType.FAVORITE);
-  const [selectSortType, setSelectSortType] = useState<SORT_TYPE>(sortedType);
+  const [sortedType, setSortedType] = useState<SortType>(SortType.FAVORITE);
+  const [selectSortType, setSelectSortType] = useState<SortType>(sortedType);
   const [infoVisible, setInfoVisible] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [sortedArticles, setSortedArticles] = useState(dummyArticle);
