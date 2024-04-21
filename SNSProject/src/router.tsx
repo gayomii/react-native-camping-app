@@ -12,6 +12,7 @@ import ArticlePage from './pages/article/ArticlePage';
 import SettingsPage from './pages/setting/SettingsPage';
 import CampingInfoDetailPage from './pages/home/CampingInfoDetailPage';
 import ArticleDetailPage from './pages/article/ArticleDetailPage';
+import NewPostPage from './pages/community/NewPostPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -45,6 +46,7 @@ const MainTab = () => {
       }}>
       <Tab.Screen name="camping" component={HomeTab} />
       <Tab.Screen name="article" component={ArticleTab} />
+      <Tab.Screen name="newPost" component={NewPostPage} />
       <Tab.Screen name="community" component={CommunityPage} />
       <Tab.Screen name="settings" component={SettingsPage} />
     </Tab.Navigator>
