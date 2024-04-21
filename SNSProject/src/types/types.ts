@@ -10,6 +10,12 @@ export type ArticleTabParamList = {
   articleDetail: ArticleProps | undefined;
 };
 
+export type LoginParamList = {
+  login: undefined;
+  signUp: undefined;
+  resetPassword: undefined;
+};
+
 export type CampingInfoProps = {
   facltNm?: string;
   addr1?: string;

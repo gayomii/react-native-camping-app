@@ -12,14 +12,27 @@ import ArticlePage from './pages/article/ArticlePage';
 import SettingsPage from './pages/setting/SettingsPage';
 import CampingInfoDetailPage from './pages/home/CampingInfoDetailPage';
 import ArticleDetailPage from './pages/article/ArticleDetailPage';
+import LoginPage from './pages/login/LoginPage';
 import NewPostPage from './pages/community/NewPostPage';
+import SignUpPage from './pages/login/SignUpPage';
+import ResetPasswordPage from './pages/login/ResetPasswordPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const renderTabBar = (props: BottomTabBarProps) => <CustomBottomTab {...props} />;
 
-const HomeTab = () => {
+const LoginStack = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="login" component={LoginPage} />
+      <Stack.Screen name="signUp" component={SignUpPage} />
+      <Stack.Screen name="resetPassword" component={ResetPasswordPage} />
+    </Stack.Navigator>
+  );
+};
+
+const HomeStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="home" component={HomePage} />
@@ -28,7 +41,7 @@ const HomeTab = () => {
   );
 };
 
-const ArticleTab = () => {
+const ArticleStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="articleList" component={ArticlePage} />
@@ -44,20 +57,26 @@ const MainTab = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      <Tab.Screen name="camping" component={HomeTab} />
-      <Tab.Screen name="article" component={ArticleTab} />
+      <Tab.Screen name="camping" component={HomeStack} />
+      <Tab.Screen name="article" component={ArticleStack} />
       <Tab.Screen name="newPost" component={NewPostPage} />
       <Tab.Screen name="community" component={CommunityPage} />
       <Tab.Screen name="settings" component={SettingsPage} />
+      {/* <Tab.Screen name="loginText" component={LoginPage} /> */}
     </Tab.Navigator>
   );
 };
 
 const Router = () => {
-  return (
+  // TODO: test
+  const isLogin = false;
+
+  return isLogin ? (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="MainTab" component={MainTab} />
     </Stack.Navigator>
+  ) : (
+    <LoginStack />
   );
 };
 
