@@ -39,9 +39,9 @@ const HomePage = () => {
   }, []);
 
   const onEndReached = async () => {
-    setPageNo(pageNo + 1);
-    setLoading(true);
-    if (loading) {
+    if (!loading) {
+      setPageNo(pageNo + 1);
+      setLoading(true);
       const result = await fetchCampingList();
       setCampingList([...campingList, ...result]);
       setLoading(false);
