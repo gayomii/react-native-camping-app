@@ -13,6 +13,8 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { LoginParamList } from '../../types/types';
+import { validateEmail, validatePassword } from '../../utils/validate';
+import { signUp } from '../../auth';
 
 const signUpImg = require('../../assets/signUpImg.png');
 
@@ -34,6 +36,23 @@ const SignUpPage = () => {
     setShowPassword(false);
     setAutoLogin(false);
     setAgree(false);
+  };
+
+  const userRegister = async () => {
+    try {
+      if (!nameValue) throw new Error('이름을 입력해 주세요.');
+      if (!emailValue) throw new Error('이메일을 입력해 주세요.');
+      if (!passwordValue) throw new Error('비밀번호를 입력해 주세요.');
+
+      if (!validateEmail(emailValue)) throw new Error('이메일 형식에 맞지 않습니다.');
+      if (!validatePassword(passwordValue))
+        throw new Error('비밀번호는 8자 이상 입력해야 합니다.');
+
+      if (!agree) throw new Error('약관에 동의해주세요.');
+      await signUp({ email: emailValue, password: passwordValue, name: nameValue });
+    } catch (e) {
+      alert(e);
+    }
   };
 
   return (
@@ -103,7 +122,7 @@ const SignUpPage = () => {
             <Text style={styles.basicFontStyle}>약관 동의</Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.signUpBtn}>
+        <TouchableOpacity onPress={userRegister} style={styles.signUpBtn}>
           <Text style={styles.signUpText}>회원가입</Text>
         </TouchableOpacity>
         <View>

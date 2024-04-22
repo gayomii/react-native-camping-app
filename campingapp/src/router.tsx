@@ -22,7 +22,7 @@ const Tab = createBottomTabNavigator();
 
 const renderTabBar = (props: BottomTabBarProps) => <CustomBottomTab {...props} />;
 
-const LoginStack = () => {
+export const LoginStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="login" component={LoginPage} />
@@ -67,17 +67,10 @@ const MainTab = () => {
   );
 };
 
-const Router = () => {
-  // TODO: test
-  const isLogin = false;
-
-  return isLogin ? (
+export const MainStack = () => {
+  return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="MainTab" component={MainTab} />
     </Stack.Navigator>
-  ) : (
-    <LoginStack />
   );
 };
-
-export default Router;

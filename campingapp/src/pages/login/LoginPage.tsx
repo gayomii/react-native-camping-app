@@ -15,6 +15,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { LoginParamList } from '../../types/types';
 import { userLogin } from '../../auth';
+import { validateEmail } from '../../utils/validate';
 
 const backgroundImg = require('../../assets/loginBackgroundImg.png');
 
@@ -29,6 +30,18 @@ const LoginPage = () => {
     setEmailValue('');
     setPasswordValue('');
     setShowPassword(false);
+  };
+
+  const login = () => {
+    try {
+      if (!emailValue) throw new Error('이메일을 입력해 주세요.');
+      if (!passwordValue) throw new Error('비밀번호를 입력해 주세요.');
+
+      validateEmail(emailValue);
+      userLogin({ email: emailValue, password: passwordValue });
+    } catch (e) {
+      alert(e);
+    }
   };
 
   return (
@@ -88,9 +101,7 @@ const LoginPage = () => {
                 </Text>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              style={styles.loginBtn}
-              onPress={() => userLogin({ email: emailValue, password: passwordValue })}>
+            <TouchableOpacity style={styles.loginBtn} onPress={login}>
               <Text style={styles.loginText}>로그인</Text>
             </TouchableOpacity>
             <TouchableOpacity>
