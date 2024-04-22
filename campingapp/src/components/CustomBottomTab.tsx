@@ -9,7 +9,7 @@ import {
   ImageBackground,
 } from 'react-native';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { bottomImages } from '../constants/images';
+import { BOTTOM_IMAGES } from '../constants/images';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 type ButtonIconProps = {
@@ -29,7 +29,7 @@ const BottomIcon = ({ name, type = 'inactive' }: ButtonIconProps) => {
   const imgName = type === 'inactive' ? `${name}_off` : name;
   return (
     <View>
-      <Image source={bottomImages[imgName]} style={styles.bottomIconImage} />
+      <Image source={BOTTOM_IMAGES[imgName]} style={styles.bottomIconImage} />
     </View>
   );
 };
